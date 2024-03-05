@@ -1,5 +1,7 @@
 *.tar.gz
+.DS_Store
 /build
+/lib
 /openssl-*
 /apr-*
 /oqs-provider
