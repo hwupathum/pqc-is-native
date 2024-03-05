@@ -9,7 +9,7 @@ env:
   TCNATIVE_VERSION: 1.3.0
   OPENSSL_INSTALL: ${{ github.workspace }}/build/openssl
   APR_INSTALL: ${{ github.workspace }}/build/apr
-  OUTPUT_DIR: ${{ github.workspace }}/output
+  OUTPUT_DIR: ${{ github.workspace }}/bin
   
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Run script.sh
+      - name: Run macos.sh
         run: |
           chmod +x macos.sh
           ./macos.sh
