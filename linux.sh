@@ -30,8 +30,6 @@ wget https://dlcdn.apache.org//apr/apr-$APR_VERSION.tar.gz
 tar -xzf apr-$APR_VERSION.tar.gz
 cd apr-$APR_VERSION
 
-# See https://stackoverflow.com/questions/18091991/error-while-compiling-apache-apr-make-file-not-found
-touch libtoolT
 ./configure --prefix=$APR_INSTALL
 make && make install
 
@@ -40,11 +38,9 @@ apr_file_path="$APR_INSTALL/lib/libapr-1.la"
 if [ -e "$apr_file_path" ]; then
     # Backup the file
     cp "$apr_file_path" "$apr_file_path.bak"
-
     # Comment or delete the specified sections using awk
     awk '/dlname=/ {$0="#"$0} /library_names=/ {$0="#"$0} {print}' "$apr_file_path" > "$apr_file_path.temp"
     mv "$apr_file_path.temp" "$apr_file_path"
-
     echo "Sections in libapr-1.la edited successfully."
 else
     echo "Error: libapr-1.la file not found in $APR_INSTALL/lib."
@@ -58,7 +54,7 @@ wget https://dlcdn.apache.org/tomcat/tomcat-connectors/native/$TCNATIVE_VERSION/
 
 tar -xzf tomcat-native-$TCNATIVE_VERSION-src.tar.gz
 cd tomcat-native-$TCNATIVE_VERSION-src/native
-./configure --with-apr=$APR_INSTALL/bin/apr-1-config --with-ssl=$OPENSSL_INSTALL --prefix=$GITHUB_WORKSPACE
+./configure --with-apr=$APR_INSTALL/bin --with-ssl=$OPENSSL_INSTALL --prefix=$GITHUB_WORKSPACE
 make && make install
 
 # ----------- Install ops provider for OpenSSL -----------
