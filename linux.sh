@@ -11,15 +11,6 @@ OUTPUT_DIR=$GITHUB_WORKSPACE/lib
 
 export OPENSSL_INSTALL=$OPENSSL_INSTALL
 
-
-# ----------- Install required packages -----------
-# Gcc
-# cmake
-# wget
-
-# # liboqs
-# sudo apt install astyle cmake gcc ninja-build libssl-dev python3-pytest python3-pytest-xdist unzip xsltproc doxygen graphviz python3-yaml valgrind
-
 # ----------- Build static version of OpenSSL 3.x.x -----------
 
 mkdir -p $OUTPUT_DIR
@@ -63,23 +54,23 @@ fi
 
 # ----------- Build tc-native -----------
 
-cd $GITHUB_WORKSPACE
-echo "Downloading tomcat-native-$TCNATIVE_VERSION source code..."
-wget https://dlcdn.apache.org/tomcat/tomcat-connectors/native/$TCNATIVE_VERSION/source/tomcat-native-$TCNATIVE_VERSION-src.tar.gz
+# cd $GITHUB_WORKSPACE
+# echo "Downloading tomcat-native-$TCNATIVE_VERSION source code..."
+# wget https://dlcdn.apache.org/tomcat/tomcat-connectors/native/$TCNATIVE_VERSION/source/tomcat-native-$TCNATIVE_VERSION-src.tar.gz
 
-tar -xzf tomcat-native-$TCNATIVE_VERSION-src.tar.gz
-cd tomcat-native-$TCNATIVE_VERSION-src/native
-./configure --with-apr=$APR_INSTALL --with-ssl=$OPENSSL_INSTALL --prefix=$GITHUB_WORKSPACE
-make && make install
+# tar -xzf tomcat-native-$TCNATIVE_VERSION-src.tar.gz
+# cd tomcat-native-$TCNATIVE_VERSION-src/native
+# ./configure --with-apr=$APR_INSTALL --with-ssl=$OPENSSL_INSTALL --prefix=$GITHUB_WORKSPACE
+# make && make install
 
-# ----------- Install ops provider for OpenSSL -----------
+# # ----------- Install ops provider for OpenSSL -----------
 
-export OPENSSL_INSTALL=$OPENSSL_INSTALL
-cd $GITHUB_WORKSPACE
-git clone -b main https://github.com/open-quantum-safe/oqs-provider.git
-cd oqs-provider
+# export OPENSSL_INSTALL=$OPENSSL_INSTALL
+# cd $GITHUB_WORKSPACE
+# git clone -b main https://github.com/open-quantum-safe/oqs-provider.git
+# cd oqs-provider
 
-./scripts/fullbuild.sh
-cmake --install _build
+# ./scripts/fullbuild.sh
+# cmake --install _build
 
-cp $OPENSSL_INSTALL/lib64/ossl-modules/oqsprovider.so $OUTPUT_DIR
+# cp $OPENSSL_INSTALL/lib64/ossl-modules/oqsprovider.so $OUTPUT_DIR
