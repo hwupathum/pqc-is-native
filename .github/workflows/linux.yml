@@ -1,4 +1,4 @@
-name: macOS x64 Workflow
+name: Linux x64 Workflow
 
 on:
   workflow_dispatch:
