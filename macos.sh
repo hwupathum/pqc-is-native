@@ -34,19 +34,19 @@ cd apr-$APR_VERSION
 make && make install
 
 # Ensure the static APR library is used
-# apr_file_path="$APR_INSTALL/lib/libapr-1.la"
-# if [ -e "$apr_file_path" ]; then
-#     # Backup the file
-#     cp "$apr_file_path" "$apr_file_path.bak"
+apr_file_path="$APR_INSTALL/lib/libapr-1.la"
+if [ -e "$apr_file_path" ]; then
+    # Backup the file
+    cp "$apr_file_path" "$apr_file_path.bak"
 
-#     # Comment or delete the specified sections using awk
-#     awk '/dlname=/ {$0="#"$0} /library_names=/ {$0="#"$0} {print}' "$apr_file_path" > "$apr_file_path.temp"
-#     mv "$apr_file_path.temp" "$apr_file_path"
+    # Comment or delete the specified sections using awk
+    awk '/dlname=/ {$0="#"$0} /library_names=/ {$0="#"$0} {print}' "$apr_file_path" > "$apr_file_path.temp"
+    mv "$apr_file_path.temp" "$apr_file_path"
 
-#     echo "Sections in libapr-1.la edited successfully."
-# else
-#     echo "Error: libapr-1.la file not found in $APR_INSTALL/lib."
-# fi
+    echo "Sections in libapr-1.la edited successfully."
+else
+    echo "Error: libapr-1.la file not found in $APR_INSTALL/lib."
+fi
 
 # ----------- Build tc-native -----------
 
