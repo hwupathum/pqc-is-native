@@ -54,12 +54,11 @@ wget https://dlcdn.apache.org/tomcat/tomcat-connectors/native/$TCNATIVE_VERSION/
 
 tar -xzf tomcat-native-$TCNATIVE_VERSION-src.tar.gz
 cd tomcat-native-$TCNATIVE_VERSION-src/native
-./configure --with-apr=$APR_INSTALL/bin --with-ssl=$OPENSSL_INSTALL --prefix=$GITHUB_WORKSPACE
+./configure --with-apr=$APR_INSTALL --with-ssl=$OPENSSL_INSTALL --prefix=$GITHUB_WORKSPACE
 make && make install
 
 # ----------- Install ops provider for OpenSSL -----------
 
-export OPENSSL_INSTALL=$OPENSSL_INSTALL
 cd $GITHUB_WORKSPACE
 git clone -b main https://github.com/open-quantum-safe/oqs-provider.git
 cd oqs-provider
