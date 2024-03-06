@@ -17,7 +17,7 @@ mkdir -p $OUTPUT_DIR
 
 echo "Downloading openssl-$OPENSSL_VERSION source code..."
 wget https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz
-tar -xf openssl-$OPENSSL_VERSION.tar.gz
+tar -xzf openssl-$OPENSSL_VERSION.tar.gz
 cd openssl-$OPENSSL_VERSION
 
 ./Configure --prefix=$OPENSSL_INSTALL  no-shared -fPIC --openssldir=$OUTPUT_DIR
@@ -29,7 +29,7 @@ make && make install_sw
 cd $GITHUB_WORKSPACE
 echo "Downloading apr-$APR_VERSION source code..."
 wget https://dlcdn.apache.org//apr/apr-$APR_VERSION.tar.gz
-tar -xf apr-$APR_VERSION.tar.gz
+tar -xzf apr-$APR_VERSION.tar.gz
 cd apr-$APR_VERSION
 
 # See https://stackoverflow.com/questions/18091991/error-while-compiling-apache-apr-make-file-not-found
@@ -58,7 +58,7 @@ cd $GITHUB_WORKSPACE
 echo "Downloading tomcat-native-$TCNATIVE_VERSION source code..."
 wget https://dlcdn.apache.org/tomcat/tomcat-connectors/native/$TCNATIVE_VERSION/source/tomcat-native-$TCNATIVE_VERSION-src.tar.gz
 
-tar -xf tomcat-native-$TCNATIVE_VERSION-src.tar.gz
+tar -xzf tomcat-native-$TCNATIVE_VERSION-src.tar.gz
 cd tomcat-native-$TCNATIVE_VERSION-src/native
 ./configure --with-apr=$APR_INSTALL --with-ssl=$OPENSSL_INSTALL --prefix=$GITHUB_WORKSPACE
 make && make install
