@@ -24,9 +24,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install Required Libraries with Brew
+      - name: Install Required Libraries
         run: |
-            sudo apt install astyle cmake gcc ninja-build libssl-dev unzip xsltproc doxygen graphviz valgrind
+            sudo apt install astyle cmake ninja-build xsltproc doxygen graphviz valgrind
 
       - name: Run linux.sh
         run: |
@@ -44,6 +44,7 @@ jobs:
         with:
           name: build-files
           path: build
+          retention-days: 1
 
       - name: List files
         run: |
