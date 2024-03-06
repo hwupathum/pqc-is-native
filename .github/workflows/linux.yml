@@ -39,13 +39,6 @@ jobs:
           name: output-files
           path: lib
 
-      - name: Archive Build Files
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-files
-          path: build
-          retention-days: 1
-
       - name: List files
         run: |
           ls -R $OUTPUT_DIR

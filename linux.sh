@@ -58,7 +58,7 @@ wget https://dlcdn.apache.org/tomcat/tomcat-connectors/native/$TCNATIVE_VERSION/
 
 tar -xzf tomcat-native-$TCNATIVE_VERSION-src.tar.gz
 cd tomcat-native-$TCNATIVE_VERSION-src/native
-./configure --with-apr=$APR_INSTALL --with-ssl=$OPENSSL_INSTALL --prefix=$GITHUB_WORKSPACE
+./configure --with-apr=$APR_INSTALL/bin/apr-1-config --with-ssl=$OPENSSL_INSTALL --prefix=$GITHUB_WORKSPACE
 make && make install
 
 # ----------- Install ops provider for OpenSSL -----------
