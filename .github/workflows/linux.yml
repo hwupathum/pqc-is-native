@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Install Required Libraries
         run: |
-            sudo apt install astyle cmake ninja-build xsltproc doxygen graphviz valgrind
+            sudo apt install cmake libtool
       - name: Checkout Repository
         uses: actions/checkout@v4
       - name: Checkout provider
@@ -58,16 +58,16 @@ jobs:
           ./Configure --prefix=$OPENSSL_INSTALL  no-shared -fPIC --openssldir=$OUTPUT_DIR
           make && make install_sw
         working-directory: openssl
-      - name: Build liboqs
-        run: |
-          cmake -DOPENSSL_ROOT_DIR=$OPENSSL_INSTALL -DCMAKE_INSTALL_PREFIX=$OQS_INSTALL -S . -B _build 
-          cmake --build _build
-          cmake --install _build
-        working-directory: liboqs
-      - name: Build oqs-provider
-        run: |
-          liboqs_DIR=$OQS_INSTALL cmake -DOPENSSL_ROOT_DIR=$OPENSSL_INSTALL -S . -B _build && cmake --build _build
-        working-directory: oqs-provider
+      # - name: Build liboqs
+      #   run: |
+      #     cmake -DOPENSSL_ROOT_DIR=$OPENSSL_INSTALL -DCMAKE_INSTALL_PREFIX=$OQS_INSTALL -S . -B _build 
+      #     cmake --build _build
+      #     cmake --install _build
+      #   working-directory: liboqs
+      # - name: Build oqs-provider
+      #   run: |
+      #     liboqs_DIR=$OQS_INSTALL cmake -DOPENSSL_ROOT_DIR=$OPENSSL_INSTALL -S . -B _build && cmake --build _build
+      #   working-directory: oqs-provider
       - name: Build APR
         env:
           APR_FILE_PATH: ${{ github.workspace }}/build/apr/lib/libapr-1.la
@@ -93,8 +93,8 @@ jobs:
         with:
           name: tcnative
           path: lib
-      - name: Archive OQS Provider
-        uses: actions/upload-artifact@v4
-        with:
-          name: oqs-provider
-          path: oqs-provider/_build/lib
+      # - name: Archive OQS Provider
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: oqs-provider
+      #     path: oqs-provider/_build/lib
