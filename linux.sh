@@ -30,7 +30,7 @@ wget https://dlcdn.apache.org//apr/apr-$APR_VERSION.tar.gz
 tar -xzf apr-$APR_VERSION.tar.gz
 cd apr-$APR_VERSION
 
-./configure --prefix=$APR_INSTALL
+./configure --prefix=$APR_INSTALL  --enable-shared=no
 make && make install
 
 # Ensure the static APR library is used
