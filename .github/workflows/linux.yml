@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Install Required Libraries
         run: |
-            sudo apt install cmake libtool
+            sudo apt install cmake libtool-bin
       - name: Checkout Repository
         uses: actions/checkout@v4
       - name: Checkout provider
