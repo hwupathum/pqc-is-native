@@ -13,9 +13,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Install required libraries with Brew
+      - name: Install Required Libraries
         run: |
-          brew install autoconf libtool
+            sudo apt install astyle cmake ninja-build xsltproc doxygen graphviz valgrind
       - name: Checkout Repository
         uses: actions/checkout@v4
       - name: Checkout provider
