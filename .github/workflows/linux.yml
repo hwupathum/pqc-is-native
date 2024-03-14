@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Install Required Libraries
         run: |
-            sudo apt install cmake libtool-bin
+            sudo apt install cmake libtool-bin libapr1-dev libssl-dev
       - name: Checkout Repository
         uses: actions/checkout@v4
       - name: Checkout provider
@@ -78,9 +78,9 @@ jobs:
           ./configure --prefix=$APR_INSTALL
           make && make install
           # Comment or delete the specified sections using awk
-          # awk '/dlname=/ {$0="#"$0} /library_names=/ {$0="#"$0} {print}' "$APR_FILE_PATH" > "$APR_FILE_PATH.temp"
-          # mv "$APR_FILE_PATH.temp" "$APR_FILE_PATH"
-          # echo "Sections in libapr-1.la edited successfully."
+          awk '/dlname=/ {$0="#"$0} /library_names=/ {$0="#"$0} {print}' "$APR_FILE_PATH" > "$APR_FILE_PATH.temp"
+          mv "$APR_FILE_PATH.temp" "$APR_FILE_PATH"
+          echo "Sections in libapr-1.la edited successfully."
         working-directory: apr
       - name: Build Tomcat Native
         run: |
