@@ -85,8 +85,8 @@ jobs:
       - name: Build Tomcat Native
         run: |
           sh buildconf --with-apr=../../apr
-          ./configure --with-apr=$APR_INSTALL --with-ssl=$OPENSSL_INSTALL --prefix=$GITHUB_WORKSPACE
-          make && make install
+          CFLAGS=-DHAVE_ENGINE_LOAD_BUILTIN_ENGINES ./configure --with-apr=$APR_INSTALL --with-ssl=$OPENSSL_INSTALL --prefix=$GITHUB_WORKSPACE
+          CFLAGS=-DHAVE_ENGINE_LOAD_BUILTIN_ENGINES make && make install
         working-directory: tcnative/native
       - name: Archive Tomcat Native Files
         uses: actions/upload-artifact@v4
