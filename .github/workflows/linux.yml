@@ -51,7 +51,7 @@ jobs:
         with:
           set-safe-directory: true
           repository: apache/tomcat-native
-          ref: 1.3.0
+          ref: 1.2.39
           path: tcnative
       - name: Build openssl
         run: |
